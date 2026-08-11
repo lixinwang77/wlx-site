@@ -5,7 +5,7 @@
 ## 本地开发
 
 ```bash
-npm install --cache /tmp/npm-cache-wlx
+npm install
 npm run dev
 ```
 
