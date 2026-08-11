@@ -1,0 +1,65 @@
+export const siteConfig = {
+  name: 'wlx',
+  title: 'wlx — 博客与作品',
+  description: '分享经验与作品的个人站点。',
+  url: 'https://wlx-site.pages.dev',
+  author: 'wlx',
+  tagline: '把做过的事，慢慢说清楚。',
+  github: 'https://github.com',
+  socials: [
+    {
+      id: 'x',
+      label: 'X',
+      href: 'https://x.com',
+      icon: 'x',
+    },
+    {
+      id: 'jike',
+      label: '即刻',
+      href: 'https://web.okjike.com',
+      icon: 'jike',
+    },
+    {
+      id: 'xiaohongshu',
+      label: '小红书',
+      href: 'https://www.xiaohongshu.com',
+      icon: 'xiaohongshu',
+    },
+    {
+      id: 'github',
+      label: 'GitHub',
+      href: 'https://github.com',
+      icon: 'github',
+    },
+    {
+      id: 'bilibili',
+      label: 'Bilibili',
+      href: 'https://www.bilibili.com',
+      icon: 'bilibili',
+    },
+    {
+      id: 'zcool',
+      label: '站酷',
+      href: 'https://www.zcool.com.cn',
+      icon: 'zcool',
+    },
+    {
+      id: 'behance',
+      label: 'Behance',
+      href: 'https://www.behance.net',
+      icon: 'behance',
+    },
+    {
+      id: 'rss',
+      label: 'RSS',
+      href: '/rss.xml',
+      icon: 'rss',
+      external: false,
+    },
+  ],
+  nav: [
+    { label: '博客', href: '/blog' },
+    { label: '作品', href: '/works' },
+    { label: '关于', href: '/about' },
+  ],
+} as const;

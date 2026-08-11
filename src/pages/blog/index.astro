@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+---
+
+<BaseLayout title="博客" description="经验分享与学习笔记。">
+  <Header slot="header" />
+
+  <section class="shell page-hero">
+    <p class="eyebrow">Blog</p>
+    <h1>博客</h1>
+    <p class="lead">把做过的事、学过的方法和想清楚的问题写成文章。</p>
+  </section>
+
+  <section class="shell section" style="padding-top: 0;">
+    <div class="filter-bar" data-filter-bar aria-label="文章标签">
+      <button type="button" data-filter="all" aria-current="page">全部</button>
+      {tags.map((tag) => <button type="button" data-filter={tag}>{tag}</button>)}
+    </div>
+
+    <div class="list" data-filter-list>
+      {
+        posts.map((post) => (
+          <a
+            class="list-item"
+            href={`/blog/${post.id}`}
+            data-tags={post.data.tags.join(',')}
+          >
+            <span class="list-item__meta">
+              {post.data.pubDate.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              })}
+            </span>
+            <span>
+              <span class="list-item__title">{post.data.title}</span>
+              <span class="list-item__desc">{post.data.description}</span>
+            </span>
+            <span class="list-item__tags">
+              {post.data.tags.slice(0, 3).map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .filter-bar button {
+    padding: 0.4rem 0.85rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-size: 0.92rem;
+  }
+
+  .filter-bar button[aria-current='page'],
+  .filter-bar button:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+</style>
+
+<script>
+  const bar = document.querySelector('[data-filter-bar]');
+  const list = document.querySelector('[data-filter-list]');
+  if (bar && list) {
+    bar.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLButtonElement)) return;
+      const filter = target.dataset.filter ?? 'all';
+      bar.querySelectorAll('button').forEach((button) => {
+        button.setAttribute('aria-current', button === target ? 'page' : 'false');
+        if (button !== target) button.removeAttribute('aria-current');
+      });
+      target.setAttribute('aria-current', 'page');
+      list.querySelectorAll('[data-tags]').forEach((item) => {
+        if (!(item instanceof HTMLElement)) return;
+        const tags = item.dataset.tags?.split(',').filter(Boolean) ?? [];
+        item.hidden = filter !== 'all' && !tags.includes(filter);
+      });
+    });
+  }
+</script>

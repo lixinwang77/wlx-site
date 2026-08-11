@@ -1,0 +1,75 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works', ({ data }) => !data.draft);
+  return works.map((work) => ({
+    params: { slug: work.id },
+    props: { work },
+  }));
+}
+
+const { work } = Astro.props;
+const { Content } = await render(work);
+const dateLabel = work.data.pubDate.toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={work.data.title} description={work.data.description}>
+  <Header slot="header" />
+
+  <article class="shell page-hero">
+    <p class="eyebrow">Work</p>
+    <h1>{work.data.title}</h1>
+    <div class="meta-row">
+      <time datetime={work.data.pubDate.toISOString()}>{dateLabel}</time>
+      {
+        work.data.tags.map((tag) => (
+          <a class="tag" href={`/works?tag=${encodeURIComponent(tag)}`}>
+            {tag}
+          </a>
+        ))
+      }
+    </div>
+
+    {
+      work.data.links.length > 0 && (
+        <div class="meta-row">
+          {work.data.links.map((link) => (
+            <a class="btn" href={link.href} target="_blank" rel="noopener noreferrer">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      work.data.video && (
+        <div class="prose" style="margin-bottom: 1.5rem;">
+          <div style="position: relative; padding-bottom: 56.25%; border-radius: 0.5rem; overflow: hidden; border: 1px solid var(--rule);">
+            <iframe
+              src={work.data.video}
+              title={`${work.data.title} 视频`}
+              style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+              loading="lazy"
+              allowfullscreen
+            />
+          </div>
+        </div>
+      )
+    }
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
