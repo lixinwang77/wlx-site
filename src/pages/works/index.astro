@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import WorkCard from '../../components/WorkCard.astro';
 
 const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -25,31 +26,16 @@ const tags = [...new Set(works.flatMap((work) => work.data.tags))];
       {tags.map((tag) => <button type="button" data-filter={tag}>{tag}</button>)}
     </div>
 
-    <div class="list" data-filter-list>
+    <div class="work-grid" data-filter-list>
       {
         works.map((work) => (
-          <a
-            class="list-item"
+          <WorkCard
             href={`/works/${work.id}`}
+            title={work.data.title}
+            tags={work.data.tags}
+            cover={work.data.cover}
             data-tags={work.data.tags.join(',')}
-          >
-            <span class="list-item__meta">
-              {work.data.pubDate.toLocaleDateString('zh-CN', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-              })}
-            </span>
-            <span>
-              <span class="list-item__title">{work.data.title}</span>
-              <span class="list-item__desc">{work.data.description}</span>
-            </span>
-            <span class="list-item__tags">
-              {work.data.tags.slice(0, 3).map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
-            </span>
-          </a>
+          />
         ))
       }
     </div>

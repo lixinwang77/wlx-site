@@ -3,6 +3,7 @@ title: 作品展示页示例
 description: 演示如何在作品详情里放说明、标签，以及后续嵌入视频。
 pubDate: 2026-07-20
 tags: [设计, 示例]
+cover: /images/work-placeholder.svg
 links:
   - label: 相关灵感
     href: https://ricoui.com/

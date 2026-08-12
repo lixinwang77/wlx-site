@@ -1,0 +1,31 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  tags?: string[];
+  cover?: string;
+  class?: string;
+  'data-tags'?: string;
+}
+
+const {
+  href,
+  title,
+  tags = [],
+  cover = '/images/work-placeholder.svg',
+  class: className,
+  'data-tags': dataTags,
+} = Astro.props;
+const badge = tags[0];
+---
+
+<a class:list={['work-card', className]} href={href} data-tags={dataTags}>
+  <div class="work-card__body">
+    {badge && <span class="work-card__badge">{badge}</span>}
+    <h3 class="work-card__title">{title}</h3>
+    <span class="work-card__cta">进一步了解 →</span>
+  </div>
+  <div class="work-card__visual">
+    <img src={cover} alt="" loading="lazy" />
+  </div>
+</a>
