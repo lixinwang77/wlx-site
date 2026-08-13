@@ -242,9 +242,10 @@ ul {
 }
 
 .hero__title {
-  max-width: 14ch;
-  font-size: clamp(2.8rem, 7vw, 4.8rem);
+  max-width: none;
   margin-bottom: var(--space-5);
+  font-size: clamp(1.45rem, 6.8vw, 4.8rem);
+  white-space: nowrap;
 }
 
 .hero__title em {
