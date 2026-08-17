@@ -11,13 +11,12 @@ const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
 const tags = [...new Set(works.flatMap((work) => work.data.tags))];
 ---
 
-<BaseLayout title="作品" description="项目与创作展示。">
+<BaseLayout title="作品" description="做过的应用与项目展示。">
   <Header slot="header" />
 
   <section class="shell page-hero">
     <p class="eyebrow">Works</p>
     <h1>作品</h1>
-    <p class="lead">独立于博客的作品集：说明、截图，以及需要时嵌入的视频。</p>
   </section>
 
   <section class="shell section" style="padding-top: 0;">

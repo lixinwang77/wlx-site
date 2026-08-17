@@ -537,6 +537,10 @@ ul {
   max-width: var(--content);
 }
 
+.prose--wide {
+  max-width: none;
+}
+
 .prose :is(h2, h3) {
   margin-top: 2rem;
   margin-bottom: 0.75rem;
