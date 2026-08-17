@@ -2,7 +2,7 @@
 title: 倒计时器
 description: 简洁风格的 Android 倒计时应用：滚轮设时、快捷预设、到点响铃提醒。
 pubDate: 2026-08-17
-tags: [Android, 应用]
+tags: [Android 应用]
 cover: /images/works/countdown-timer/cover.svg
 links:
   - label: 下载 APK

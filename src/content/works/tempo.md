@@ -2,7 +2,7 @@
 title: 成刻
 description: 日程任务管理应用 Tempo：待办、提醒、日历同步，以及 AI 辅助捕获。
 pubDate: 2026-08-17
-tags: [Android, 应用]
+tags: [Android 应用]
 cover: /images/works/tempo/cover.png
 links:
   - label: 下载 APK
