@@ -1,4 +1,5 @@
 ---
+import CursorSparkles from '../components/CursorSparkles.astro';
 import { siteConfig } from '../data/site';
 import '../styles/global.css';
 
@@ -29,6 +30,7 @@ const canonical = new URL(Astro.url.pathname, siteConfig.url).href;
     <title>{pageTitle}</title>
   </head>
   <body>
+    <CursorSparkles />
     <a class="skip-link" href="#main">跳到正文</a>
     <slot name="header" />
     <main id="main">
