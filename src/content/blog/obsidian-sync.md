@@ -2,7 +2,7 @@
 title: Obsidian 笔记同步
 description: 用绿联 NAS、Remotely Save 和节点小宝，实现 Obsidian 局域网与外网同步。
 pubDate: 2026-08-19
-tags: [Obsidian, 笔记, NAS]
+tags: [笔记]
 ---
 
 ## 前期准备

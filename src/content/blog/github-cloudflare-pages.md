@@ -2,7 +2,7 @@
 title: GitHub + Cloudflare 建站
 description: 用 GitHub 存源码、Cloudflare Pages 构建部署，把静态网站快速发布上线。
 pubDate: 2026-08-13
-tags: [建站, GitHub, Cloudflare]
+tags: [建站]
 ---
 
 ## 为什么是这套组合
