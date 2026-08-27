@@ -9,14 +9,16 @@ const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 const tags = [...new Set(works.flatMap((work) => work.data.tags))];
+const countLabel = new Intl.NumberFormat('zh-Hans-CN-u-nu-hanidec').format(works.length);
 ---
 
 <BaseLayout title="作品" description="做过的应用与项目展示。">
   <Header slot="header" />
 
   <section class="shell page-hero">
-    <p class="eyebrow">Works</p>
+    <p class="eyebrow">近作</p>
     <h1>作品</h1>
+    <p class="lead">做过的应用与项目，共{countLabel}件，可下载或在线体验。</p>
   </section>
 
   <section class="shell section" style="padding-top: 0;">
@@ -27,12 +29,14 @@ const tags = [...new Set(works.flatMap((work) => work.data.tags))];
 
     <div class="work-grid" data-filter-list>
       {
-        works.map((work) => (
+        works.map((work, index) => (
           <WorkCard
             href={`/works/${work.id}`}
             title={work.data.title}
+            description={work.data.description}
             tags={work.data.tags}
             cover={work.data.cover}
+            featured={index === 0}
             data-tags={work.data.tags.join(',')}
           />
         ))
@@ -42,24 +46,6 @@ const tags = [...new Set(works.flatMap((work) => work.data.tags))];
 
   <Footer slot="footer" />
 </BaseLayout>
-
-<style>
-  .filter-bar button {
-    padding: 0.4rem 0.85rem;
-    border: 0;
-    border-radius: 999px;
-    background: transparent;
-    color: var(--ink-soft);
-    cursor: pointer;
-    font-size: 0.92rem;
-  }
-
-  .filter-bar button[aria-current='page'],
-  .filter-bar button:hover {
-    background: var(--ink);
-    color: var(--paper);
-  }
-</style>
 
 <script>
   const bar = document.querySelector('[data-filter-bar]');
@@ -78,6 +64,7 @@ const tags = [...new Set(works.flatMap((work) => work.data.tags))];
         const tags = item.dataset.tags?.split(',').filter(Boolean) ?? [];
         item.hidden = filter !== 'all' && !tags.includes(filter);
       });
+      list.toggleAttribute('data-compact', filter !== 'all');
     });
   }
 </script>
