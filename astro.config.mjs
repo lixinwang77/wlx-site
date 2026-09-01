@@ -4,7 +4,7 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://wlx-site.pages.dev',
+  site: 'https://wanglix.com',
   integrations: [mdx()],
   markdown: {
     shikiConfig: {

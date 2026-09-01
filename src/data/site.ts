@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'wlx',
   title: 'wlx — 博客与作品',
   description: '分享经验与作品的个人站点。',
-  url: 'https://wlx-site.pages.dev',
+  url: 'https://wanglix.com',
   author: 'wlx',
   tagline: '把做过的事，慢慢说清楚。',
   github: 'https://github.com',
