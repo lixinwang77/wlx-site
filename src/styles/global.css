@@ -695,6 +695,12 @@ ul {
 .prose img {
   border-radius: var(--radius);
   margin-block: 1.25rem;
+  /* Tall phone UIs shrink via max-height; landscape samples can still use content width */
+  width: auto;
+  height: auto;
+  max-width: min(100%, var(--content));
+  max-height: min(70vh, 36rem);
+  object-fit: contain;
 }
 
 .prose blockquote {
