@@ -6,7 +6,7 @@ tags: [Android 应用]
 cover: /images/works/tempo/cover.png
 links:
   - label: 下载 APK
-    href: https://tempo-api.wanglix.com/update/tempo-1229.apk
+    href: https://tempo-api.wanglix.com/update/latest.apk
 ---
 
 这是我做的 Android 待办应用「成刻」（Tempo）：把琐事记下来、排进日程，并在该提醒时提醒你。也可完全离线使用；需要时再登录做云同步。
